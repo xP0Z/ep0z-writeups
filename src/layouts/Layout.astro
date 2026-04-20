@@ -84,8 +84,8 @@ const currentPath = Astro.url.pathname;
     <nav>
       <div class="logo">xP0Z // OSINT</div>
       <div>
-        <a href="/" class={currentPath !== '/tools' ? 'active' : ''} style="margin-right: 20px;">[ EVENTS ]</a>
-        <a href="/tools" class={currentPath === '/tools' ? 'active' : ''}>[ TOOLS ]</a>
+        <a href="/ep0z-writeups/" class={!currentPath.includes('/tools') ? 'active' : ''} style="margin-right: 20px;">[ EVENTS ]</a>
+        <a href="/ep0z-writeups/tools" class={currentPath.includes('/tools') ? 'active' : ''}>[ TOOLS ]</a>
       </div>
     </nav>
     
