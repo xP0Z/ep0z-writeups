@@ -1,17 +1,92 @@
 ---
-
+import Layout from '../layouts/Layout.astro';
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Layout>
+  <h2>> OVERVIEW</h2>
+  <p style="line-height: 1.6;">
+    A repository of OSINT methodologies, geolocation techniques, and challenge writeups. 
+    Focusing on metadata extraction, architectural cross-referencing, and open-source intelligence gathering.
+  </p>
+
+  <h2 style="border: none; color: var(--accent-glow); margin-top: 40px; margin-bottom: 5px;">> CAPTURED EVENTS</h2>
+  <p style="color: var(--text-muted); margin-top: 0; margin-bottom: 20px;">Master directory of compromised CTF infrastructures.</p>
+  
+  <div class="event-grid">
+    
+    <a href="/cit-ctf" class="event-card box">
+      <div class="event-title">CIT@CTF</div>
+      <div class="event-dates">[ ACTIVE: APR 17, 2026 21:30 - APR 20, 2026 00:30 ]</div>
+      <div class="event-desc">
+        University of New Haven OSINT challenges. Focuses on social media pivoting, 
+        reverse image geolocation, and encrypted document analysis.
+      </div>
+      <div class="event-stats">
+        <span class="stat-label">TEAM:</span> Rayleigh &nbsp;&nbsp;//&nbsp;&nbsp;
+        <span class="stat-label">RANK:</span> 87th &nbsp;&nbsp;//&nbsp;&nbsp;
+        <span class="stat-label">SCORE:</span> 20892 pts
+      </div>
+    </a>
+    
+  </div>
+</Layout>
+
+<style>
+  .event-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .event-card {
+    display: block; /* Turns the link into a full-width block */
+    text-decoration: none;
+    margin-bottom: 0; /* Overrides default .box margin to use the grid gap */
+    transition: all 0.3s ease;
+  }
+  
+  /* The hover animation for the entire box */
+  .event-card:hover {
+    border-color: var(--accent-glow);
+    transform: translateY(-3px);
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.05);
+  }
+  
+  .event-card:hover .event-title {
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.6);
+  }
+
+  .event-title {
+    color: var(--accent-glow);
+    font-weight: bold;
+    font-size: 1.4em;
+    margin-bottom: 8px;
+    letter-spacing: 1px;
+    transition: 0.3s;
+  }
+
+  .event-dates {
+    color: var(--text-muted);
+    font-size: 0.9em;
+    margin-bottom: 12px;
+  }
+
+  .event-desc {
+    color: var(--text-main);
+    line-height: 1.5;
+  }
+
+  /* NEW STATS STYLING */
+  .event-stats {
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px dashed var(--border-color);
+    font-size: 0.9em;
+    color: var(--accent-glow);
+  }
+
+  .stat-label {
+    color: var(--text-muted);
+    font-size: 0.85em;
+  }
+</style>

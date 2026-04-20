@@ -1,0 +1,104 @@
+---
+const { frontmatter } = Astro.props;
+const currentPath = Astro.url.pathname;
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>{frontmatter ? frontmatter.title : 'xP0Z OSINT'} | Writeups</title>
+    <style is:global>
+      :root {
+        --bg-color: #0f0f0f;
+        --panel-bg: #171717;
+        --text-main: #cccccc;
+        --text-muted: #888888;
+        --accent-glow: #ffffff; 
+        --border-color: #333333;
+      }
+      body {
+        background-color: var(--bg-color); 
+        color: var(--text-main);
+        font-family: 'Courier New', Courier, monospace; 
+        margin: 0; 
+        padding: 0;
+      }
+      
+      /* --- CRT EFFECT --- */
+      body::after {
+        content: "";
+        position: fixed;
+        top: -100%; left: -100%;
+        width: 300%; height: 300%;
+        background-image: url('data:image/svg+xml,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="1" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)"/%3E%3C/svg%3E');
+        opacity: 0.08; 
+        filter: blur(1px); 
+        pointer-events: none; 
+        z-index: 9999; 
+        animation: filmJitter 0.12s infinite;
+      }
+      @keyframes filmJitter {
+        0% { transform: translate(0, 0); }
+        20% { transform: translate(-1%, 1%); }
+        40% { transform: translate(1%, -1%); }
+        60% { transform: translate(-1%, -1%); }
+        80% { transform: translate(1%, 1%); }
+        100% { transform: translate(0, 0); }
+      }
+
+      nav {
+        background-color: #0a0a0a; 
+        padding: 20px 30px; 
+        border-bottom: 1px solid var(--border-color);
+        display: flex; justify-content: space-between; align-items: center;
+        position: relative; z-index: 10;
+      }
+      .logo { 
+        font-weight: bold; font-size: 1.5em; color: var(--accent-glow);
+        animation: neonPulse 2.5s infinite alternate;
+      }
+      @keyframes neonPulse {
+        0% { filter: drop-shadow(0 0 2px #fff) drop-shadow(0 0 5px var(--accent-glow)); }
+        100% { filter: drop-shadow(0 0 2px #fff) drop-shadow(0 0 15px var(--accent-glow)); }
+      }
+
+      .container { max-width: 900px; margin: 40px auto; padding: 20px; position: relative; z-index: 10;}
+      h1, h2, h3 { color: var(--accent-glow); border-bottom: 1px solid var(--border-color); padding-bottom: 10px; letter-spacing: 2px; text-transform: uppercase; }
+      .box { background-color: var(--panel-bg); border: 1px solid var(--border-color); padding: 25px; margin-bottom: 20px; border-radius: 2px; }
+      
+      a { color: var(--text-muted); text-decoration: none; text-transform: uppercase; letter-spacing: 1px; transition: 0.3s;}
+      a:hover, a.active { color: var(--accent-glow); text-shadow: 0 0 8px rgba(255, 255, 255, 0.6); }
+
+      /* --- RESPONSIVE IMAGES --- */
+      img {
+        max-width: 100%;
+        height: auto;
+        border: 1px solid var(--border-color);
+        border-radius: 2px;
+        margin: 20px 0;
+        box-sizing: border-box;
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <div class="logo">xP0Z // OSINT</div>
+      <div>
+        <a href="/" class={currentPath !== '/tools' ? 'active' : ''} style="margin-right: 20px;">[ EVENTS ]</a>
+        <a href="/tools" class={currentPath === '/tools' ? 'active' : ''}>[ TOOLS ]</a>
+      </div>
+    </nav>
+    
+    <div class="container">
+      {frontmatter && (
+        <div style="margin-bottom: 30px;">
+          <h1 style="border: none; margin-bottom: 5px;">> {frontmatter.title}</h1>
+          <div style="color: var(--text-muted);">Event: {frontmatter.event}</div>
+        </div>
+      )}
+
+      <slot /> 
+      
+    </div>
+  </body>
+</html>

@@ -1,0 +1,59 @@
+---
+import Layout from '../layouts/Layout.astro';
+const allPosts = Object.values(import.meta.glob('./posts/*.md', { eager: true }));
+
+let citCtfPosts = allPosts.filter(post => post.frontmatter.event === 'CIT@CTF');
+
+// Your exact custom order
+const customOrder = [
+  "Follow the Flock",
+  "Yannella",
+  "The Forbidden Sock",
+  "Has it really been 2 years?",
+  "The Curator's Exit",
+  "The Curator's Exit - Part 2",
+  "The Curator's Exit - Part 3",
+  "The Curator's Exit - Final",
+  "Cartographer's Secret"
+];
+
+// Sort the posts based on the array above
+citCtfPosts.sort((a, b) => {
+  return customOrder.indexOf(a.frontmatter.title) - customOrder.indexOf(b.frontmatter.title);
+});
+---
+
+<Layout>
+  <div style="margin-bottom: 25px;">
+    <a href="/" style="font-size: 0.9em;">&lt;&lt; RETURN TO DIRECTORY</a>
+  </div>
+
+  <h2>> CIT@CTF</h2>
+  
+  <div style="color: var(--text-muted); line-height: 1.6; margin-bottom: 30px; padding-left: 10px; border-left: 2px solid var(--border-color);">
+    <strong>TARGET URL:</strong> <a href="https://ctf.cyber-cit.club/" target="_blank" style="color: var(--accent-glow); text-transform: none; text-decoration: underline;">https://ctf.cyber-cit.club/</a><br>
+    <strong>BEGINS:</strong> Friday, April 17, 2026 @ 9:30 PM<br>
+    <strong>ENDS:</strong> Monday, April 20, 2026 @ 12:30 AM
+    
+    <div style="margin-top: 15px; padding-top: 15px; border-top: 1px dashed var(--border-color); color: var(--accent-glow); font-size: 0.95em; letter-spacing: 1px;">
+      <span style="color: var(--text-muted); font-size: 0.85em;">TEAM:</span> Rayleigh &nbsp;&nbsp;//&nbsp;&nbsp;
+      <span style="color: var(--text-muted); font-size: 0.85em;">RANK:</span> 87th &nbsp;&nbsp;//&nbsp;&nbsp;
+      <span style="color: var(--text-muted); font-size: 0.85em;">SCORE:</span> 20892 pts
+    </div>
+  </div>
+
+  <div class="box">
+    <h3 style="border: none; color: var(--accent-glow); margin-bottom: 5px;">> ACQUIRED TARGETS</h3>
+    
+    <ul style="list-style: none; padding: 0;">
+      {citCtfPosts.map((post) => (
+        <li style="border-bottom: 1px dashed var(--border-color); padding: 15px 0; display: flex; align-items: center;">
+          <span style="color: var(--text-muted); margin-right: 15px;">[+]</span>
+          <a href={post.url} style="color: var(--accent-glow); font-weight: bold; font-size: 1.1em;">
+            {post.frontmatter.title}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+</Layout>
