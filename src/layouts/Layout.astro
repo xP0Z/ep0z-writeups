@@ -6,7 +6,7 @@ const currentPath = Astro.url.pathname;
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>{frontmatter ? frontmatter.title : 'xP0Z OSINT'} | Writeups</title>
+    <title>{frontmatter ? frontmatter.title : 'Project xP0Zure'} | Writeups</title>
     <style is:global>
       :root {
         --bg-color: #0f0f0f;
@@ -48,18 +48,35 @@ const currentPath = Astro.url.pathname;
 
       nav {
         background-color: #0a0a0a; 
-        /* The inline padding will override this, but we keep it for fallback */
         border-bottom: 1px solid var(--border-color);
         position: relative; z-index: 10;
       }
       
-      .logo { 
-        font-weight: bold; font-size: 1.5em; color: var(--accent-glow);
+      /* --- IMAGE LOGO STYLING --- */
+      .logo {
+        justify-self: start;
+        display: flex;
+        align-items: center;
+      }
+      .logo img { 
+        height: 80px; 
+        vertical-align: middle;
         animation: neonPulse 2.5s infinite alternate;
+        /* Override global image styles so the logo doesn't get a border */
+        border: none;
+        margin: 0;
       }
       @keyframes neonPulse {
-        0% { filter: drop-shadow(0 0 2px #fff) drop-shadow(0 0 5px var(--accent-glow)); }
-        100% { filter: drop-shadow(0 0 2px #fff) drop-shadow(0 0 15px var(--accent-glow)); }
+        0% {
+            filter: drop-shadow(0 0 2px #fff) 
+                    drop-shadow(0 0 5px var(--accent-glow))
+                    drop-shadow(0 0 80px var(--accent-glow));
+        }
+        100% {
+            filter: drop-shadow(0 0 2px #fff) 
+                    drop-shadow(0 0 12px var(--accent-glow))
+                    drop-shadow(0 0 80px var(--accent-glow));
+        }
       }
 
       .container { max-width: 900px; margin: 40px auto; padding: 20px; position: relative; z-index: 10;}
@@ -80,10 +97,10 @@ const currentPath = Astro.url.pathname;
       
       .ctf-button:hover {
         background-color: var(--accent-glow) !important;
-        color: #000000 !important; /* Forces text to black */
-        box-shadow: 0 0 15px rgba(255, 255, 255, 0.8); /* Creates the outer glow */
+        color: #000000 !important; 
+        box-shadow: 0 0 15px rgba(255, 255, 255, 0.8); 
         border-color: var(--accent-glow);
-        text-shadow: none !important; /* Removes the default link text-shadow */
+        text-shadow: none !important; 
       }
 
       /* --- RESPONSIVE IMAGES --- */
@@ -99,7 +116,10 @@ const currentPath = Astro.url.pathname;
   </head>
   <body>
     <nav style="display: grid; grid-template-columns: repeat(3, 1fr); align-items: center; width: 100%; padding: 20px 30px; box-sizing: border-box;">
-      <div class="logo" style="justify-self: start;">xP0Z // OSINT</div>
+      
+      <a href="/xp0z-writeups/" class="logo">
+        <img src="/xp0z-writeups/images/logo.jpg" alt="Project xP0Zure" />
+      </a>
 
       <div class="centered-links" style="justify-self: center; display: flex; gap: 20px;">
         <a href="/xp0z-writeups/" class={!currentPath.includes('/tools') ? 'active' : ''}>EVENTS</a>
